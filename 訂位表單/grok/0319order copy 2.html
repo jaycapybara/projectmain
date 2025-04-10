@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台管理系統 - 訂位與餐點明細</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+            border-radius: 8px;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <section id="s02" aria-hidden="true">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <div class="h1">控制台</div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="http://192.168.10.103/project/langlangdontcry-index.html">首頁</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://192.168.10.103/project/langlangdontcry-member-control-panel_v1.html">會員管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://192.168.10.103/project/20250109-C.html">菜單管理</a>
+                            </li>
+                            
+                        </ul>
+                        <div>
+                            <span class="h4 text-light fw-900 me-3 d-none" id="s02_username_showtext">歡迎會員: <span
+                                    class="h3 text-011" id="s02_username_text">xxx</span> </span>
+                            <button class="btn bg-008 d-none" id="s02_logout_btn">登出</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <div class="container">
+        <h1 class="text-center my-4">後台管理系統 - 訂位與餐點明細</h1>
+        <div class="text-end mb-3">
+            <button class="btn btn-custom" onclick="openCreateModal()"><i class="fas fa-plus"></i> 新增訂位</button>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">訂位記錄</h5>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="bookingAccordion"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 編輯用的模態框 -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">編輯訂位</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editBookingForm">
+                        <input type="hidden" name="id" id="editId">
+                        <div class="mb-3">
+                            <label>姓名</label>
+                            <input type="text" name="name" id="editName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>電話</label>
+                            <input type="text" name="phone" id="editPhone" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>日期</label>
+                            <input type="date" name="date" id="editDate" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>時間</label>
+                            <input type="time" name="time" id="editTime" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>分店</label>
+                            <input type="text" name="shop" id="editShop" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>人數</label>
+                            <input type="number" name="people" id="editPeople" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>寵物數</label>
+                            <input type="number" name="pets" id="editPets" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>座位</label>
+                            <select name="seat_id" id="editSeatId" class="form-control" required></select>
+                        </div>
+                        <div class="mb-3">
+                            <label>總金額</label>
+                            <input type="number" name="total_amount" id="editTotalAmount" class="form-control" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitEdit()">保存更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增訂位用的模態框 -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalLabel">新增訂位</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createBookingForm">
+                        <div class="mb-3">
+                            <label>姓名</label>
+                            <input type="text" name="name" id="createName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>電話</label>
+                            <input type="text" name="phone" id="createPhone" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>日期</label>
+                            <input type="date" name="date" id="createDate" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>時間</label>
+                            <input type="time" name="time" id="createTime" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>分店</label>
+                            <input type="text" name="shop" id="createShop" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>人數</label>
+                            <input type="number" name="people" id="createPeople" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>寵物數</label>
+                            <input type="number" name="pets" id="createPets" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>座位</label>
+                            <select name="seat_id" id="createSeatId" class="form-control" required></select>
+                        </div>
+                        <div class="mb-3">
+                            <label>總金額</label>
+                            <input type="number" name="total_amount" id="createTotalAmount" class="form-control" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="submitCreate()">新增訂位</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 加載訂位數據
+            $.ajax({
+                url: 'api.php?action=get_bookings',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    let bookingHtml = '';
+                    response.forEach((booking, index) => {
+                        let collapseId = 'collapse' + index;
+                        bookingHtml += `
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading${index}">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="true" aria-controls="${collapseId}">
+                                        ID: ${booking.id} - ${booking.name} (${booking.date} ${booking.time})
+                                    </button>
+                                </h2>
+                                <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#bookingAccordion">
+                                    <div class="accordion-body">
+                                        <table class="table table-bordered">
+                                            <tr><th>姓名</th><td>${booking.name}</td><th>電話</th><td>${booking.phone}</td></tr>
+                                            <tr><th>日期</th><td>${booking.date}</td><th>時間</th><td>${booking.time}</td></tr>
+                                            <tr><th>分店</th><td>${booking.shop}</td><th>人數</th><td>${booking.people}</td></tr>
+                                            <tr><th>寵物數</th><td>${booking.pets}</td><th>座位</th><td>${booking.seat_name}</td></tr>
+                                            <tr>
+                                                <th>總金額</th><td>${booking.total_amount}</td>
+                                                <th>操作</th>
+                                                <td>
+                                                    <button class="btn btn-sm btn-edit" onclick="openEditModal(${booking.id})"><i class="fas fa-edit"></i> 編輯</button>
+                                                    <button class="btn btn-sm btn-delete" onclick="confirmDelete(${booking.id})"><i class="fas fa-trash"></i> 刪除</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <h6 class="mt-3">餐點明細</h6>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr><th>餐點名稱</th><th>數量</th><th>單價</th><th>小計</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                ${booking.order_items.map(item => `
+                                                    <tr><td>${item.item_name}</td><td>${item.quantity}</td><td>${item.price}</td><td>${item.quantity * item.price}</td></tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    $('#bookingAccordion').html(bookingHtml);
+                },
+                error: function() {
+                    alert('無法加載訂位資料');
+                }
+            });
+
+            // 加載座位選項（用於編輯和新增）
+            $.get('api.php?action=get_seats', function(seats) {
+                let options = '<option value="">請選擇座位</option>';
+                seats.forEach(seat => {
+                    options += `<option value="${seat.id}">${seat.name}</option>`;
+                });
+                $('#editSeatId').html(options);
+                $('#createSeatId').html(options); // 為新增模態框填充座位選項
+            }, 'json');
+        });
+
+        // 打開編輯模態框並填充數據
+        function openEditModal(id) {
+            $.get('api.php?action=get_bookings', function(bookings) {
+                const booking = bookings.find(b => b.id == id);
+                if (booking) {
+                    $('#editId').val(booking.id);
+                    $('#editName').val(booking.name);
+                    $('#editPhone').val(booking.phone);
+                    $('#editDate').val(booking.date);
+                    $('#editTime').val(booking.time);
+                    $('#editShop').val(booking.shop);
+                    $('#editPeople').val(booking.people);
+                    $('#editPets').val(booking.pets);
+                    $('#editSeatId').val(booking.seat_id);
+                    $('#editTotalAmount').val(booking.total_amount);
+                    $('#editModal').modal('show');
+                }
+            }, 'json');
+        }
+
+        // 提交編輯表單
+        function submitEdit() {
+            const formData = {
+                id: $('#editId').val(),
+                name: $('#editName').val(),
+                phone: $('#editPhone').val(),
+                date: $('#editDate').val(),
+                time: $('#editTime').val(),
+                shop: $('#editShop').val(),
+                people: $('#editPeople').val(),
+                pets: $('#editPets').val(),
+                seat_id: $('#editSeatId').val(),
+                total_amount: $('#editTotalAmount').val(),
+                order_items: [] // 如果需要更新 order_items，可以這裡動態添加
+            };
+
+            $.ajax({
+                url: 'api.php?action=update_booking',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    if (response.success) {
+                        $('#editModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('更新失敗: ' + response.error);
+                    }
+                },
+                error: function() {
+                    alert('更新請求失敗');
+                }
+            });
+        }
+
+        // 打開新增模態框
+        function openCreateModal() {
+            $('#createBookingForm')[0].reset(); // 清空表單
+            $('#createModal').modal('show');
+        }
+
+        // 提交新增表單
+        function submitCreate() {
+            const formData = {
+                name: $('#createName').val(),
+                phone: $('#createPhone').val(),
+                date: $('#createDate').val(),
+                time: $('#createTime').val(),
+                shop: $('#createShop').val(),
+                people: $('#createPeople').val(),
+                pets: $('#createPets').val(),
+                seat_id: $('#createSeatId').val(),
+                total_amount: $('#createTotalAmount').val(),
+                order_items: [] // 如果需要添加 order_items，可以這裡動態添加
+            };
+
+            $.ajax({
+                url: 'api.php?action=create_booking',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    if (response.success) {
+                        $('#createModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('新增失敗: ' + response.error);
+                    }
+                },
+                error: function() {
+                    alert('新增請求失敗');
+                }
+            });
+        }
+
+        // 刪除功能
+        function confirmDelete(id) {
+            if (confirm('確定要刪除此訂位記錄嗎？')) {
+                $.post('api.php?action=delete_booking', { id: id }, function(response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        alert('刪除失敗: ' + response.error);
+                    }
+                }, 'json');
+            }
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
