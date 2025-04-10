@@ -30,9 +30,12 @@ HTML5	PHP Figma  jQuery	 Bootstrap	AJAX	CSS	JavaScript  MySQL  Vue 3
 
 	
 		
-   
+ <h2>資料庫</h2> 
+
+ <img src="screencapture-192-168-10-103-phpMyAdmin-index-php-2025-04-10-14_41_53.png" alt="">
    
    <h1>作品</h1>
+      <img src="screencapture-192-168-10-103-project-photo-php-2025-04-10-11_32_39.png" alt="">
    
  <h2>前端介面</h2>
    
