@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜單管理介面-上架建檔</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mycolor.css">
+    <style>
+        body {
+            font-family: "Zen Maru Gothic", serif;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="s02"  aria-hidden="true">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <div class="h1">控制台</div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="langlangdontcry-index.html">首頁</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="langlangdontcry-member-control-panel_v1.html">會員管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://192.168.10.103/%e8%a8%82%e4%bd%8d%e8%a1%a8%e5%96%ae/grok/0319order%20copy%202.html">訂單管理</a>
+                            </li>
+                        </ul>
+                        <div>
+                            <span class="h4 text-light fw-900 me-3 d-none" id="s02_username_showtext">歡迎會員: <span
+                                    class="h3 text-011" id="s02_username_text">xxx</span> </span>
+                            <button class="btn bg-008 d-none" id="s02_logout_btn">登出</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">菜單上架管理</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="20250109-C.html">菜單建檔</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="20250109-R.html">菜單列表</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+    </section>
+    
+    <div class="container">
+        <div class="row justify-content-center py-5">
+            <div class="col-md-10">
+                <div class="card shadow shadow-lg">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="pname" class="form-label">餐點名稱</label>
+                            <input type="text" name="pname" id="pname" class="form-control is-invalid"
+                                placeholder="字數2-20" list="pname_list">
+                            <datalist id="pname_list">
+                                <!-- <option value="浪金瓜"></option>
+                                <option value="浪艾利"></option>
+                                <option value="浪龍龍"></option>
+                                <option value="浪鐵男"></option>
+                                <option value="浪愛寶"></option>
+                                <option value="浪喬莉"></option>
+                                <option value="浪小乖"></option> -->
+
+                            </datalist>
+                            <div class="valid-feedback" id="pname-valid-feedback">符合規則</div>
+                            <div class="invalid-feedback" id="pname-invalid-feedback">不符合規則</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">餐點費用</label>
+                            <input type="number" name="price" id="price" class="form-control is-invalid" min="0"
+                                max="2000" placeholder="1~2000元">
+                            <div class="valid-feedback">符合規則</div>
+                            <div class="invalid-feedback">不符合規則</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="remark" class="form-label">內容物</label>
+                            <textarea name="remark" id="remark" class="form-control is-invalid"
+                                placeholder="字數2-100"></textarea>
+                            <div class="valid-feedback">符合規則</div>
+                            <div class="invalid-feedback">不符合規則</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">供應狀況</label>
+                            <input type="text" name="status" id="status" class="form-control is-invalid"
+                                placeholder="字數2-20">
+                            <div class="valid-feedback">符合規則</div>
+                            <div class="invalid-feedback">不符合規則</div>
+                        </div>
+                        <div class="mb-3">
+                            <!-- <form action="20250109-C.php"> -->
+                            <label for="" class="form-label h3 text-001">選擇上傳檔案(圖片)</label>
+                            <input type="file" class="form-control form-control-lg" id="fileupload">
+                            <div class="valid-feedback">上傳格式為jpeg or png!</div>
+                            <div class="invalid-feedback">上傳格式錯誤!</div>
+                            <img src="" alt="" class="img-fluid w-50 mt-3 d-none" id="prveImg">
+                            <!-- </form> -->
+
+                        </div>
+                        <!-- <button class="btn btn-dark d-block mx-auto mb-3" id="upload_btn">確認</button> -->
+
+
+                        <div class="text-center">
+                            <button class="btn bt-001">取消</button>
+                            <button class="btn bt-003" id="ok_btn">確認</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var flag_pname = false;
+        var flag_price = false;
+        var flag_remark = false;
+        var flag_status = false;
+        var flag_upload = false;
+
+        $(function () {
+            //即時監聽 pname
+            $("#pname").bind("input propertychange", function () {
+                if ($(this).val().length > 1 && $(this).val().length < 21) {
+                    var JSONdata = {};
+                    JSONdata["pname"] = $(this).val();
+                    console.log(JSON.stringify(JSON));
+
+                   
+                    $.ajax({
+                        type: "POST",
+                        url: "http://192.168.10.103/project/20250109-check_uni_pname.php",
+                        data: JSON.stringify(JSONdata),
+                        dataType: "json",
+                        success: showdata_check_uni,
+                        error: function () {
+                            alert("error-http://192.168.10.103/project/20250109-check_uni_pname.php")
+                        }
+                    });
+
+
+                } else {
+                    $("#pname-invalid-feedback").text("不符合規則"); ""
+                    $("#pname").removeClass("is-valid");
+                    $("#pname").addClass("is-invalid");
+                    flag_pname = false;
+                }
+            });
+            //即時監聽 price
+            $("#price").bind("input propertychange", function () {
+                if ($(this).val() > 0 && $(this).val() < 2001) {
+                    $("#price").removeClass("is-invalid");
+                    $("#price").addClass("is-valid");
+                    flag_price = true;
+                } else {
+                    $("#price").removeClass("is-valid");
+                    $("#price").addClass("is-invalid");
+                    flag_price = false;
+                }
+            });
+            //即時監聽 remark
+            $("#remark").bind("input propertychange", function () {
+                if ($(this).val().length > 1 && $(this).val().length < 200) {
+                    $("#remark").removeClass("is-invalid");
+                    $("#remark").addClass("is-valid");
+                    flag_remark = true;
+                } else {
+                    $("#remark").removeClass("is-valid");
+                    $("#remark").addClass("is-invalid");
+                    flag_remark = false;
+                }
+            });
+
+            //即時監聽 status
+            $("#status").bind("input propertychange", function () {
+                if ($(this).val().length > 1 && $(this).val().length < 150) {
+                    $("#status").removeClass("is-invalid");
+                    $("#status").addClass("is-valid");
+                    flag_status = true;
+                } else {
+                    $("#status").removeClass("is-valid");
+                    $("#status").addClass("is-invalid");
+                    flag_status = false;
+                }
+            });
+
+            //即時監聽 fileupload
+
+            $("#fileupload").change(function () {
+                console.log(fileupload);
+                console.log(fileupload.files);
+                console.log(fileupload.files[0]);
+                console.log(fileupload.files[0].type);
+
+                if (fileupload.files[0].type == "image/jpeg" || fileupload.files[0].type == "image/png") {
+                    console.log(URL.createObjectURL(fileupload.files[0]));
+                    $("#prveImg").removeClass("d-none");
+                    $("#prveImg").attr("src", URL.createObjectURL(fileupload.files[0]));
+
+
+                    $("#fileupload").removeClass("is-invalid");
+                    $("#fileupload").addClass("is-valid");
+
+                    flag_upload = true;
+                } else {
+
+                    $("#fileupload").removeClass("is-valid");
+                    $("#fileupload").addClass("is-invalid");
+                    $("#prveImg").addClass("d-none");
+
+                    flag_upload = false;
+
+
+                }
+            });
+
+
+
+            //監聽按鈕 ok_btn
+            $("#ok_btn").click(function () {
+                if (flag_pname && flag_price && flag_remark && flag_status && flag_upload) {
+                    //傳遞至後端API 執行新增
+                    //{"pname" : "美式咖啡01", "price" : "41", "remark" : "不加糖01"}
+
+                    var dataJSON = {};
+                    dataJSON["pname"] = $("#pname").val();
+                    dataJSON["price"] = $("#price").val();
+                    dataJSON["remark"] = $("#remark").val();
+                    dataJSON["status"] = $("#status").val();
+                    dataJSON["fileupload"] = $("#fileupload").val().replace("C:\\fakepath\\", "");
+                    // dataJSON["fileupload"] = $("#fileupload").attr("src"); && flag_fileupload 
+                    // .replace("C:\\fakepath\\", "")
+
+                    console.log(JSON.stringify(dataJSON));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "20250109-C.php",
+                        dataType: "json",
+                        data: JSON.stringify(dataJSON),
+                        success: showdata,
+                        error: function () {
+                            alert("error-20250109-C.php");
+                        }
+                    });
+
+                    if (flag_upload) {
+                        console.log("可上傳至後端!");
+
+                        var formData = new FormData();
+                        formData.append("file", fileupload.files[0]);
+                        console.log(formData);
+
+                        $.ajax({
+                            type: "POST",
+                            url: "20241224-1-fileupload-api.php",
+                            data: formData,
+                            dataType: "json",
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: showdata,
+                            error: function () {
+                                console.log("error-20241224-1-fileupload-api.php");
+                            }
+                        });
+                    } else {
+                        console.log("格式錯誤不可以上傳至後端!");
+                        alert("格式錯誤不可以上傳至後端!");
+                    }
+
+
+                } else {
+                    alert("欄位有錯誤!");
+                }
+
+
+            });
+        });
+
+
+        function showdata(data) {
+            console.log(data);
+            if (data.state) {
+                // alert(data.message);
+                // location.href = "20250102-C-product.html";
+                Swal.fire({
+                    icon: "success",
+                    title: data.message,
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    denyButtonText: `Don't save`,
+                    allowOutsideClick: false,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        location.href = "20250109-C.html";
+                    }
+                });
+            } else {
+                alert(data.message);
+            }
+        }
+
+        function showdata_check_uni(data) {
+            console.log(data);
+            if (data.state) {
+                $("#pname").removeClass("is-invalid");
+                $("#pname").addClass("is-valid");
+                $("#pname-valid-feedback").text(data.message);
+                flag_pname = true;
+            } else {
+                $("#pname").removeClass("is-valid");
+                $("#pname").addClass("is-invalid");
+                $("#pname-invalid-feedback").text(data.message);
+                flag_pname = false;
+            }
+        }
+        $(function () {
+            //確認uid是否合法
+            if (getCookie("Uid01")) {
+                //將uid01傳遞至後端API執行驗證
+                //input {"uid01" : "c5e6c37a"}
+                var JSONdata = {};
+                JSONdata["uid01"] = getCookie("Uid01");
+                console.log(JSON.stringify(JSONdata));
+
+                $.ajax({
+                    type: "POST",
+                    url: "member_control_api_v2.php?action=checkuid",
+                    data: JSON.stringify(JSONdata),
+                    dataType: "json",
+                    success: showdata_checkuid,
+                    error: function () {
+                        Swal.fire({
+                            title: "API介接錯誤!",
+                            text: "member_control_api_v2.php?action=checkuid",
+                            icon: "error"
+                        });
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: "請先登入會員!",
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    denyButtonText: `Don't save`,
+                    allowOutsideClick: false
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        location.href = "langlangdontcry-index.html";
+                    }
+                });
+            }
+
+             // s02_logout_btn 按鈕監聽
+             $("#s02_logout_btn").click(function(){
+                setCookie("Uid01","",7);
+                location.href = "langlangdontcry-index.html";
+            });
+
+        });
+
+        function showdata_checkuid(data) {
+            console.log(data);
+            if (data.state) {
+                //顯示歡迎訊息
+                $("#s02_username_showtext").removeClass("d-none");
+                $("#s02_username_text").text(data.data.Username);
+
+                //顯示登出按鈕
+                $("#s02_logout_btn").removeClass("d-none");
+
+                //渲染table資料
+                $.ajax({
+                    type: "GET",
+                    url: "member_control_api_v2.php?action=getalldata",
+                    dataType: "json",
+                    success: showdata_getalldata,
+                    async: false,
+                    error: function () {
+                        Swal.fire({
+                            title: "API介接錯誤!",
+                            text: "member_control_api_v2.php?action=getalldata",
+                            icon: "error"
+                        });
+                    }
+                });
+
+                //即時監聽 updateModal_phone
+                $("#updateModal_phone").bind("input propertychange", function () {
+                    if ($(this).val().length > 2 && $(this).val().length < 11) {
+                        $(this).removeClass("is-invalid");
+                        $(this).addClass("is-valid");
+                        flag_updateModal_phone = true;
+                    } else {
+                        $(this).removeClass("is-valid");
+                        $(this).addClass("is-invalid");
+                        flag_updateModal_phone = false;
+                    }
+                });
+
+                //按鈕監聽 updata_btn
+                $("#mydata #updata_btn").click(function () {
+                    console.log($(this).data("id"));
+                    console.log($(this).data("username"));
+                    console.log($(this).data("phone"));
+
+                    //將資料同步至modal
+                    u_id = $(this).data("id");
+                    $("#updateModal_username").val($(this).data("username"));
+                    $("#updateModal_phone").val($(this).data("phone"));
+                });
+
+               //按鈕監聽 delete_btn
+               $("#mydata #delete_btn").click(function () {
+                    Swal.fire({
+                        title: "確認刪除使用者?",
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: "確認",
+                        denyButtonText: `取消`,
+                        allowOutsideClick: false
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            console.log($(this).data("id"));
+                            //傳遞至後端API執行刪除行為
+                            var JSONdata = {};
+                            JSONdata["id"] = $(this).data("id");
+                            console.log(JSON.stringify(JSONdata));
+                            $.ajax({
+                                type: "DELETE",
+                                url: "member_control_api_v2.php?action=delete",
+                                data: JSON.stringify(JSONdata),
+                                dataType: "json",
+                                success: showdata_delete,
+                                error: function () {
+                                    Swal.fire({
+                                        title: "API介接錯誤!",
+                                        text: "member_control_api_v2.php?action=delete",
+                                        icon: "error"
+                                    });
+                                }
+                            });
+                        }
+                    })
+                });
+
+                //按鈕監聽 updateModal_update_btn
+                $("#updateModal_update_btn").click(function () {
+                    if (flag_updateModal_phone) {
+                        console.log($("#updateModal_phone").val());
+                        //傳遞至後端API 執行更新
+                        var JSONdata = {};
+                        JSONdata["id"] = u_id;
+                        JSONdata["phone"] = $("#updateModal_phone").val();
+                        console.log(JSON.stringify(JSONdata));
+
+                        $.ajax({
+                            type: "POST",
+                            url: "member_control_api_v2.php?action=update",
+                            data: JSON.stringify(JSONdata),
+                            dataType: "json",
+                            success: showdata_update,
+                            error: function () {
+                                Swal.fire({
+                                    title: "API介接錯誤!",
+                                    text: "member_control_api_v2.php?action=update",
+                                    icon: "error"
+                                });
+                            }
+                        });
+
+                    } else {
+                        Swal.fire({
+                            title: "欄位內容有錯誤!",
+                            icon: "error"
+                        });
+                    }
+                });
+
+            } else {
+                Swal.fire({
+                    title: "請先登入會員!",
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    denyButtonText: `Don't save`,
+                    allowOutsideClick: false
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        location.href = "langlangdontcry-index.html";
+                    }
+                });
+            }
+        }
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+    </script>
+
+
+</body>
+
+</html>
