@@ -15,8 +15,8 @@
 
  <img src="screencapture-192-168-10-103-project-lottery-php-2025-04-10-11_34_45.png" alt="">
 
-    <img src="screencapture-192-168-10-103-project-lottery-php-2025-04-10-11_34_23.png" alt="">
+ <img src="screencapture-192-168-10-103-project-lottery-php-2025-04-10-11_34_23.png" alt="">
 
 
-        <img src="screencapture-192-168-10-103-project-ranking-php-2025-04-10-11_33_42.png" alt="">
+ <img src="screencapture-192-168-10-103-project-ranking-php-2025-04-10-11_33_42.png" alt="">
       
