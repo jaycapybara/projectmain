@@ -18,10 +18,23 @@
 - 註冊、登入會員並保存會員驗證狀態。
 - CRUD 功能：顧客可查詢菜單，店家可維護菜單項目。
 - 訂單管理：記錄每筆訂單，支持訂單狀態更新與歷史查詢。
+  
 
+
+<h2> 技術還不純熟的技術</h2> 
+
+HTML5	PHP Figma  jQuery	 Bootstrap	AJAX	CSS	JavaScript  MySQL  Vue 3	
+		
+		
+		
+
+	
+		
    
    
    <h1>作品</h1>
+   
+ <h2>前端介面</h2>
    
    <img src="screencapture-192-168-10-103-project-photo-php-2025-04-10-11_32_39.png" alt="">
 
@@ -45,6 +58,8 @@
 
  <img src="screencapture-192-168-10-103-project-ranking-php-2025-04-10-11_33_42.png" alt="">
 
+ <h2>後臺管理介面</h2>
+
 <img src="screencapture-192-168-10-103-project-20250109-R-html-2025-04-10-13_53_25.png" alt="">
 
 <img src="screencapture-192-168-10-103-project-langlangdontcry-member-control-panel-v1-html-2025-04-10-13_53_00.png" alt="">
@@ -54,4 +69,9 @@
  <img src="screencapture-192-168-10-103-grok-0319order-copy-2-html-2025-04-10-13_55_08.png" alt="">
 
  <img src="screencapture-192-168-10-103-grok-0319order-copy-2-html-2025-04-10-13_54_55.png" alt="">
+
+ 
+  <h2>不用連絡我專線</h2> 控八控控 092控控控
+  
+ 
       
